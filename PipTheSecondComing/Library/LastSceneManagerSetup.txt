@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/MainScene.unity
+- path: Assets/Scenes/SinjaTestScene.unity
   isLoaded: 1
   isActive: 1
