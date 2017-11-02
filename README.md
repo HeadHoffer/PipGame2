@@ -38,4 +38,4 @@ Folder structure for future reference:
 - Models/Materials -> Materials related to models
 - Materials -> Other materials
 - Textures -> Textures
-- ThirdParty -> Third party content (SteamVR, third party models/textures, etc)
+- ThirdParty -> Third party content (third party models/textures, etc)
