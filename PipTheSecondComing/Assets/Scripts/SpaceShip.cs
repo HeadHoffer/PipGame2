@@ -5,19 +5,22 @@ using UnityEngine;
 public class SpaceShip : MonoBehaviour
 {
     public float speed;
+    private float _originalSpeed; //jos halutaan muokata speediä esim boosteilla niin tarvitaan tämä palauttamista varten
  
-
-	// Use this for initialization
-	void Start ()
+    void Start()
     {
-		
-	}
+        _originalSpeed = speed;
+    }
 	
-	// Update is called once per frame
 	void Update ()
-    { 
+    {
+        Move();
+    }
 
-		if(Input.GetKey("w"))
+    private void Move()
+    {
+
+        if (Input.GetKey("w"))
         {
             transform.Translate(Vector3.forward * Time.deltaTime * speed);
         }
