@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpaceShip : MonoBehaviour
 {
     public float speed;
+    Vector3 playerPos;
 
 	// Use this for initialization
 	void Start ()
@@ -15,9 +16,12 @@ public class SpaceShip : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-		if(Input.GetKeyDown("W"))
+        playerPos = transform.position;
+
+		if(Input.GetKeyDown("w"))
         {
-            
+            playerPos.z += speed ;
+            transform.position = playerPos;
         }
 	}
 }
