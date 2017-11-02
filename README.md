@@ -2,7 +2,7 @@
 A sequel to Pip: The Game, original cancer here:
 https://github.com/chiekaze/Pip
 
-*Special thanks to Winded for the Code Guidelines*
+*Special thanks to Winded for the Code Guidelines.*
 
 ## Code guidelines
 
