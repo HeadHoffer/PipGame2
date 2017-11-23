@@ -9,19 +9,20 @@ public class SpaceShip : MonoBehaviour
 {
     public float forwardSpeed;
     public float steeringSpeed;
+    private float _realSpeed;
 
     public float minX;
-    public float minY;
+    public float minZ;
     public float maxX;
-    public float maxY;
+    public float maxZ;
 
     public float movementSmoothing = 4f;
 
-    private Vector2 mTargetPosition;
+    private Vector3 mTargetPosition;
 
-    private Vector2 mMovementDirection;
+    private Vector3 mMovementDirection;
 
-    public Vector2 MovementDirection
+    public Vector3 MovementDirection
     {
         get { return mMovementDirection; }
     }
@@ -31,50 +32,36 @@ public class SpaceShip : MonoBehaviour
         minX = -8.3f;
         maxX = 8.3f;
 
-        minY = -3.9f;
-        maxY = 5.9f;
+        minZ = -3.9f;
+        maxZ = 5.9f;
     }
 
     void Start()
     {
-        mTargetPosition = (Vector2)transform.position;
+
     }
 
     void Update()
     {
-        var pos = mTargetPosition;
-        mMovementDirection = Vector2.zero;
-        if (Input.GetKey("a"))
+        if(Input.GetKey("w"))
         {
-            //left
-            mMovementDirection.x = -1f;
-            pos.x -= steeringSpeed * Time.deltaTime;
-        }
-        if (Input.GetKey("s"))
-        {
-            //Down
-            mMovementDirection.y = -1f;
-            pos.y -= steeringSpeed * Time.deltaTime;
-        }
-        if (Input.GetKey("d"))
-        {
-            //right
-            mMovementDirection.x = 1f;
-            pos.x += steeringSpeed * Time.deltaTime;
-        }
-        if (Input.GetKey("w"))
-        {
-            //Up
-            mMovementDirection.y = 1f;
-            pos.y += steeringSpeed * Time.deltaTime;
+            transform.Translate(Vector3.forward * forwardSpeed * Time.deltaTime);
         }
 
-        pos.x = Mathf.Clamp(pos.x, minX, maxX);
-        pos.y = Mathf.Clamp(pos.y, minY, maxY);
-        mTargetPosition = pos;
+        if(Input.GetKey("a"))
+        {
+            transform.Translate(Vector3.left * steeringSpeed * Time.deltaTime);
+        }
 
-        var xyPos = Vector2.Lerp(transform.position, mTargetPosition, 1f / movementSmoothing);
-        transform.position = new Vector3(xyPos.x, xyPos.y, transform.position.z);
+        if(Input.GetKey("s"))
+        {
+            transform.Translate(Vector3.back * forwardSpeed * Time.deltaTime);
+        }
+
+        if(Input.GetKey("d"))
+        {
+            transform.Translate(Vector3.right * steeringSpeed * Time.deltaTime);
+        }
 
         MoveForward();
     }
@@ -84,47 +71,3 @@ public class SpaceShip : MonoBehaviour
         transform.Translate(Vector3.forward * forwardSpeed * Time.deltaTime);
     }
 }
-
-//using System.Collections;
-//using System.Collections.Generic;
-//using UnityEngine;
-
-//public class SpaceShip : MonoBehaviour
-//{
-//    public float speed;
-//    private float _originalSpeed; //jos halutaan muokata speediä esim boosteilla niin tarvitaan tämä palauttamista varten
-//    public float forwardSpeed;
-
-//    void Start()
-//    {
-//        _originalSpeed = speed;
-//        forwardSpeed = _originalSpeed;
-//    }
-
-//	void Update ()
-//    {
-//        Move();
-//    }
-
-//    private void Move()
-//    {
-
-//        if (Input.GetKey("w"))
-//        {
-//            transform.Translate(Vector3.forward * Time.deltaTime * speed);
-//        }
-//        if (Input.GetKey("a"))
-//        {
-//            transform.Translate(Vector3.left * Time.deltaTime * speed);
-//        }
-//        if (Input.GetKey("s"))
-//        {
-//            transform.Translate(Vector3.back * Time.deltaTime * speed);
-//        }
-//        if (Input.GetKey("d"))
-//        {
-//            transform.Translate(Vector3.right * Time.deltaTime * speed);
-//        }
-
-//    }
-//}
