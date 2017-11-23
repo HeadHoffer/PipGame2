@@ -43,22 +43,22 @@ public class SpaceShip : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKey("w"))
+        if(Input.GetAxisRaw("Vertical") > 0)
         {
             transform.Translate(Vector3.forward * forwardSpeed * Time.deltaTime);
         }
 
-        if(Input.GetKey("a"))
+        if(Input.GetAxisRaw("Horizontal") < 0)
         {
             transform.Translate(Vector3.left * steeringSpeed * Time.deltaTime);
         }
 
-        if(Input.GetKey("s"))
+        if(Input.GetAxisRaw("Vertical") < 0)
         {
             transform.Translate(Vector3.back * forwardSpeed * Time.deltaTime);
         }
 
-        if(Input.GetKey("d"))
+        if(Input.GetAxisRaw("Horizontal") > 0)
         {
             transform.Translate(Vector3.right * steeringSpeed * Time.deltaTime);
         }
