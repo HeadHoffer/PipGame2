@@ -15,11 +15,6 @@ public class CameraBehaviour : MonoBehaviour {
 	
 	void Update ()
     {
-        MoveForward();
-	}
 
-    void MoveForward()
-    {
-        transform.Translate(Vector3.up * forwardSpeed * Time.deltaTime);
-    }
+	}
 }
