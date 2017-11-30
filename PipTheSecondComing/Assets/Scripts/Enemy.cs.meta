@@ -1,11 +1,10 @@
 fileFormatVersion: 2
-guid: b6af337925c8e804faf63b94a8499ced
-timeCreated: 1512051366
+guid: 0050bf11a66d1ab40b8237a557bcc15d
+timeCreated: 1512054088
 licenseType: Pro
 MonoImporter:
   serializedVersion: 2
-  defaultReferences:
-  - enemyGameObject: {instanceID: 0}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
