@@ -50,6 +50,7 @@ public class SpaceShip : MonoBehaviour
     {
         _nullPos = Camera.transform.position;
         var pos = _targetPosition;
+        var rotation = transform.rotation;
         _movementDirection = Vector3.zero;
 
         if(Input.GetAxisRaw("Vertical") > 0)
@@ -79,6 +80,8 @@ public class SpaceShip : MonoBehaviour
             _movementDirection.z = 1f;
             pos.z += steeringSpeed * Time.deltaTime;
         }
+
+        transform.rotation = Quaternion.Lerp(rotation, Quaternion.Euler(0, 0, _movementDirection.x * -20), Time.deltaTime * steeringSpeed);
 
         pos.x = Mathf.Clamp(pos.x, minX, maxX);
         pos.z = Mathf.Clamp(pos.z, minZ, maxZ);
