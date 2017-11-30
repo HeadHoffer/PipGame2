@@ -10,7 +10,7 @@ public class EnemySpawner : MonoBehaviour
     public float spawnRange;
 
     private GameObject _player;
-	private float _offset;
+	public float offset;
     private float _timer;
 
 	// Use this for initialization
@@ -20,7 +20,6 @@ public class EnemySpawner : MonoBehaviour
         spawnRange = 6;
 
         _player = GameObject.FindGameObjectWithTag ("Player");
-		_offset = 20;
 		Debug.Log ("hello t. enemy");
 	}
 	
@@ -42,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
     {
         // Create spawn position for enemy from player position
         Vector3 spawnPos = _player.transform.position;
-        spawnPos.z = _player.transform.position.z + _offset;
+        spawnPos.z = _player.transform.position.z + offset;
 
         // Need to add some weird offset to line up correctly
         spawnPos.y = -0.3f;

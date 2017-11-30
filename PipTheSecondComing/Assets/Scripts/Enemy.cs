@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    // Enemy hp
-    public int hp; 
+    public int hp;
+
+    public float speed;
 
 	// Use this for initialization
 	void Start ()
     {
         hp = 100;
+        speed = 8;
 	}
 	
 	// Update is called once per frame
@@ -20,6 +22,8 @@ public class Enemy : MonoBehaviour
         {
             Die();
         }
+
+        transform.Translate(Vector3.back * speed * Time.deltaTime);
 	}
 
     // Check collision
