@@ -5,11 +5,9 @@ using System.Collections;
 
 //this code will be ebin
 
-public class SpaceShip : MonoBehaviour
+public class Player : MonoBehaviour
 {
-    public float forwardSpeed;
     public float steeringSpeed;
-    private float _realSpeed;
     
     public float maxX;
     public float minX;
@@ -36,6 +34,7 @@ public class SpaceShip : MonoBehaviour
     }
 
     private int _playerHP;
+    public bool isDead = false;
 
     public int PlayerHP
     {
@@ -44,6 +43,7 @@ public class SpaceShip : MonoBehaviour
     }
 
     public GameObject Camera;
+    public GameObject DeathText;
 
     void Awake()
     {
@@ -65,6 +65,9 @@ public class SpaceShip : MonoBehaviour
 
     void Update()
     {
+        if (PlayerHP <= 0)
+            Die();
+
         _nullPos = Camera.transform.position;
         var pos = _targetPosition;
         var rotation = transform.rotation;
@@ -116,5 +119,21 @@ public class SpaceShip : MonoBehaviour
     public void TakeDamage(int damage)
     {
         PlayerHP -= damage;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "EnemyBullet")
+        {
+            TakeDamage(other.GetComponent<Bullet>().DMG);
+            Destroy(other.gameObject);
+        }
+    }
+
+    public void Die()
+    {
+        isDead = true;
+        if (DeathText)
+            DeathText.SetActive(true);
     }
 }

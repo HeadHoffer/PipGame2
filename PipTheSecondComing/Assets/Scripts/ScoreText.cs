@@ -15,9 +15,9 @@ public class ScoreText : MonoBehaviour
 	void Update ()
     {
         var text = GetComponent<Text>();
-        text.text = "Score: " + Player.GetComponent<SpaceShip>().PlayerScore;
+        text.text = "Score: " + Player.GetComponent<Player>().PlayerScore;
 
         var hpText = HPText.GetComponent<Text>();
-        hpText.text = "HP: " + Player.GetComponent<SpaceShip>().PlayerHP;
+        hpText.text = "HP: " + Player.GetComponent<Player>().PlayerHP;
     }
 }
