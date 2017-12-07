@@ -28,6 +28,21 @@ public class SpaceShip : MonoBehaviour
         get { return _movementDirection; }
     }
 
+    private int _playerScore = 0;
+
+    public int PlayerScore
+    {
+        get { return _playerScore; }
+    }
+
+    private int _playerHP;
+
+    public int PlayerHP
+    {
+        get { return _playerHP; }
+        set { _playerHP = value; }
+    }
+
     public GameObject Camera;
 
     void Awake()
@@ -44,6 +59,8 @@ public class SpaceShip : MonoBehaviour
             Camera = GameObject.FindGameObjectWithTag("MainCamera");
         
         _targetPosition = transform.position;
+
+        PlayerHP = 100;
     }
 
     void Update()
@@ -89,5 +106,10 @@ public class SpaceShip : MonoBehaviour
 
         var xzPos = Vector3.Lerp(transform.position, _targetPosition, 1f / MovementSmoothing);
         transform.position = new Vector3(xzPos.x, transform.position.y, xzPos.z);
+    }
+
+    public void UpdateScore(int value)
+    {
+        _playerScore += value;
     }
 }
