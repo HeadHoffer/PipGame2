@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     public int scoreValue;
 
     public GameObject bulletPrefab;
+    public GameObject explosion;
     public Vector3 bulletDirection = Vector3.forward;
     public float bulletSpeed;
     public float timeBetweenShots;
@@ -68,9 +69,9 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("u kyssed enemy");
         var player = GameObject.FindGameObjectWithTag("Player");
         player.GetComponent<Player>().UpdateScore(scoreValue);
+        Instantiate(explosion, gameObject.transform.position, gameObject.transform.rotation);
         Destroy(this.gameObject);
     }
 }
