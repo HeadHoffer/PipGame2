@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     public int ScoreValue;
 
     public GameObject bulletPrefab;
+    public GameObject explosion;
     public Vector3 bulletDirection = Vector3.forward;
     public float bulletSpeed;
     public float timeBetweenShots;
@@ -74,6 +75,7 @@ public class Enemy : MonoBehaviour
         Debug.Log("u kyssed enemy");
         var player = GameObject.FindGameObjectWithTag("Player");
         player.GetComponent<SpaceShip>().UpdateScore(ScoreValue);
+        Instantiate(explosion, gameObject.transform.position, gameObject.transform.rotation);
         Destroy(this.gameObject);
     }
 }
