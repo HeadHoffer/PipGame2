@@ -11,35 +11,21 @@ public class Weapon : MonoBehaviour
     public Vector3 bulletDirection = Vector3.forward;
     public float bulletSpeed = 10f;
 
-    //public float normalPitch = 1f;
-    //public float maxPitch = 1.25f;
-    //public float pitchCooldownTime = 1f;
-
-    //private AudioSource mAudio;
-
     private float mLastShotTime = 0f;
+
+    public int bulletDmg;
 
     void Start()
     {
-        //mAudio = GetComponent<AudioSource>();
+
     }
 
     void Update()
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            //if (Time.time - mLastShotTime >= pitchCooldownTime)
-            //{
-            //    mAudio.pitch = normalPitch;
-            //}
-            //else
-            //{
-            //    mAudio.pitch = normalPitch + (maxPitch - normalPitch) * (pitchCooldownTime - (Time.time - mLastShotTime));
-            //}
-
-            //mAudio.Play();
-
             var bullet = Instantiate(bulletPrefab, bulletSpawn.transform.position, bulletSpawn.transform.rotation) as GameObject;
+            bullet.GetComponent<Bullet>().DMG = bulletDmg;
             bullet.GetComponent<Rigidbody>().velocity = bulletDirection * bulletSpeed;
 
             mLastShotTime = Time.time;
