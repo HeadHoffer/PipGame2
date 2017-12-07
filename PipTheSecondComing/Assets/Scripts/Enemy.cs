@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
 
     public float speed;
 
-    public int ScoreValue;
+    public int scoreValue;
 
     public GameObject bulletPrefab;
     public GameObject explosion;
@@ -52,15 +52,12 @@ public class Enemy : MonoBehaviour
             _shotTimer = 0.0f;
         }  
     }
-
-    // Check collision
+    
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collision detected: " + other.name);
-
         if (other.tag == "Bullet")
         {
-            TakeDamage(30);
+            TakeDamage(other.GetComponent<Bullet>().DMG);
             Destroy(other.gameObject);
         }
     }
@@ -72,9 +69,8 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("u kyssed enemy");
         var player = GameObject.FindGameObjectWithTag("Player");
-        player.GetComponent<SpaceShip>().UpdateScore(ScoreValue);
+        player.GetComponent<Player>().UpdateScore(scoreValue);
         Instantiate(explosion, gameObject.transform.position, gameObject.transform.rotation);
         Destroy(this.gameObject);
     }
