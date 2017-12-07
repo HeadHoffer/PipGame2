@@ -4,21 +4,29 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int hp;
+    private int _hp;
+
+    public int HP
+    {
+        get { return _hp; }
+        set { _hp = value; }
+    }
+
     public float speed;
+
+    public int ScoreValue;
 
     public GameObject bulletPrefab;
     public Vector3 bulletDirection = Vector3.forward;
     public float bulletSpeed;
     public float timeBetweenShots;
-    public GameObject explosion;
 
     private float _shotTimer;
 
     // Use this for initialization
     void Start ()
     {
-        hp = 100;
+        HP = 100;
         speed = 8;
         bulletSpeed = 10.0f;
         timeBetweenShots = 2.0f;
@@ -27,7 +35,7 @@ public class Enemy : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (hp <= 0)
+        if (HP <= 0)
         {
             Die();
         }
@@ -58,13 +66,14 @@ public class Enemy : MonoBehaviour
 
     void TakeDamage(int damage)
     {
-        hp -= damage;
+        HP -= damage;
     }
 
     void Die()
     {
         Debug.Log("u kyssed enemy");
-        Instantiate(explosion, gameObject.transform.position, gameObject.transform.rotation);
+        var player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponent<SpaceShip>().UpdateScore(ScoreValue);
         Destroy(this.gameObject);
     }
 }
