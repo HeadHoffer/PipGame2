@@ -46,6 +46,8 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         Debug.Log("u kyssed enemy");
+        var player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponent<SpaceShip>().UpdateScore(10);
         Destroy(this.gameObject);
     }
 }
