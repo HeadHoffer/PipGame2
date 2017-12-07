@@ -12,18 +12,15 @@ public class EnemySpawner : MonoBehaviour
     private GameObject _player;
 	public float offset;
     private float _timer;
-
-	// Use this for initialization
+    
 	void Start ()
     {
         timeBetweenSpawns = 3;
         spawnRange = 6;
 
         _player = GameObject.FindGameObjectWithTag ("Player");
-		Debug.Log ("hello t. enemy");
 	}
 	
-	// Update is called once per frame
 	void Update ()
     {
         // Spawn timer

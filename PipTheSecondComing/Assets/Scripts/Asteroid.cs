@@ -13,16 +13,23 @@ public class Asteroid : MonoBehaviour
     }
 
     public float speed;
+    public float rotateSpeed;
     public int ScoreValue;
     public GameObject explosion;
 
-    // Use this for initialization
+    private float _trueSpeedX;
+    private float _trueSpeedY;
+    private float _trueSpeedZ;
+    
     void Start()
     {
         HP = 150;
-    }
 
-    // Update is called once per frame
+        _trueSpeedZ = Random.Range(rotateSpeed, 0 - rotateSpeed);
+        _trueSpeedX = Random.Range(rotateSpeed, 0 - rotateSpeed);
+        _trueSpeedY = Random.Range(rotateSpeed, 0 - rotateSpeed);
+    }
+    
     void Update()
     {
         if (HP <= 0)
@@ -30,11 +37,14 @@ public class Asteroid : MonoBehaviour
             Die();
         }
 
-        transform.Translate(Vector3.back * speed * Time.deltaTime);
-        transform.Rotate(Vector3.back * speed * Time.deltaTime);
-    }
+        if (_trueSpeedZ == 0 && _trueSpeedX == 0 && _trueSpeedY == 0)
+        { transform.Rotate(rotateSpeed, rotateSpeed, 0 - rotateSpeed, Space.World); }
+        else
+        { transform.Rotate(_trueSpeedZ, _trueSpeedX, _trueSpeedY, Space.World); }
 
-    // Check collision
+        transform.Translate(0, 0, -speed * Time.deltaTime, Space.World);
+    }
+    
     void OnTriggerEnter(Collider other)
     {
         Debug.Log("Collision detected: " + other.name);
@@ -55,7 +65,7 @@ public class Asteroid : MonoBehaviour
     {
         Debug.Log("u kyssed asteroid");
         var player = GameObject.FindGameObjectWithTag("Player");
-        player.GetComponent<SpaceShip>().UpdateScore(ScoreValue);
+        player.GetComponent<Player>().UpdateScore(ScoreValue);
         Instantiate(explosion, gameObject.transform.position, gameObject.transform.rotation);
         Destroy(this.gameObject);
     }

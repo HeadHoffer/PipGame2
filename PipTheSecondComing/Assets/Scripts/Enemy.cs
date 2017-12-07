@@ -23,8 +23,7 @@ public class Enemy : MonoBehaviour
     public float timeBetweenShots;
 
     private float _shotTimer;
-
-    // Use this for initialization
+    
     void Start ()
     {
         HP = 100;
@@ -33,7 +32,6 @@ public class Enemy : MonoBehaviour
         timeBetweenShots = 2.0f;
     }
 	
-	// Update is called once per frame
 	void Update ()
     {
         if (HP <= 0)
