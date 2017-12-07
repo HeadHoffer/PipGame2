@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     public Vector3 bulletDirection = Vector3.forward;
     public float bulletSpeed;
     public float timeBetweenShots;
+    public GameObject explosion;
 
     private float _shotTimer;
 
@@ -63,6 +64,7 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         Debug.Log("u kyssed enemy");
+        Instantiate(explosion, gameObject.transform.position, gameObject.transform.rotation);
         Destroy(this.gameObject);
     }
 }
