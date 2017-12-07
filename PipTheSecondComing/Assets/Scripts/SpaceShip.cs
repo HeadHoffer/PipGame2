@@ -112,4 +112,9 @@ public class SpaceShip : MonoBehaviour
     {
         _playerScore += value;
     }
+
+    public void TakeDamage(int damage)
+    {
+        PlayerHP -= damage;
+    }
 }
