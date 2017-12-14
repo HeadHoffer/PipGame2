@@ -27,7 +27,10 @@ public class AsteroidSpawner : MonoBehaviour
         _timer += Time.deltaTime;
         if (_timer > timeBetweenSpawns)
         {
-            SpawnAsteroid();
+            if(_player)
+            {
+                SpawnAsteroid();
+            }
             _timer = 0.0f;
         }
 
@@ -62,8 +65,11 @@ public class AsteroidSpawner : MonoBehaviour
         GameObject[] asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
         foreach (GameObject asteroid in asteroids)
         {
-            if (asteroid.transform.position.z < (_player.transform.position.z - 10.0f))
-                Destroy(asteroid);
+            if(_player)
+            {
+                if (asteroid.transform.position.z < (_player.transform.position.z - 10.0f))
+                    Destroy(asteroid);
+            }
         }
     }
 }

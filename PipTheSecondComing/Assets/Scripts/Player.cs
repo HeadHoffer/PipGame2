@@ -14,7 +14,9 @@ public class Player : MonoBehaviour
     public float maxZ;
     public float minZ;
 
-    public float MovementSmoothing = 4f;
+    public float movementSmoothing = 4f;
+
+    public GameObject explosion;
 
     private Vector3 _targetPosition;
     private Vector3 _nullPos;
@@ -43,7 +45,7 @@ public class Player : MonoBehaviour
     }
 
     public GameObject Camera;
-    public GameObject DeathText;
+    public GameObject[] DeathText;
 
     void Awake()
     {
@@ -65,9 +67,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (PlayerHP <= 0)
-            Die();
-
         _nullPos = Camera.transform.position;
         var pos = _targetPosition;
         var rotation = transform.rotation;
@@ -107,7 +106,7 @@ public class Player : MonoBehaviour
         pos.z = Mathf.Clamp(pos.z, minZ, maxZ);
         _targetPosition = pos;
 
-        var xzPos = Vector3.Lerp(transform.position, _targetPosition, 1f / MovementSmoothing);
+        var xzPos = Vector3.Lerp(transform.position, _targetPosition, 1f / movementSmoothing);
         transform.position = new Vector3(xzPos.x, transform.position.y, xzPos.z);
     }
 
@@ -119,6 +118,11 @@ public class Player : MonoBehaviour
     public void TakeDamage(int damage)
     {
         PlayerHP -= damage;
+        if(PlayerHP <= 0)
+        {
+            PlayerHP = 0;
+            Die();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -133,7 +137,12 @@ public class Player : MonoBehaviour
     public void Die()
     {
         isDead = true;
-        if (DeathText)
-            DeathText.SetActive(true);
+        for(int i = 0; i < DeathText.Length; i++)
+        {
+            if (DeathText[i])
+                DeathText[i].SetActive(true);
+        }
+        Instantiate(explosion, gameObject.transform.position, gameObject.transform.rotation);
+        Destroy(this.gameObject);
     }
 }

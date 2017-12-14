@@ -27,7 +27,10 @@ public class EnemySpawner : MonoBehaviour
         _timer += Time.deltaTime;
         if (_timer > timeBetweenSpawns)
         {
-            SpawnEnemy();
+            if(_player)
+            {
+                SpawnEnemy();
+            }
             _timer = 0.0f;
         }
 
@@ -61,8 +64,11 @@ public class EnemySpawner : MonoBehaviour
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach(GameObject enemy in enemies)
         {
-            if (enemy.transform.position.z < (_player.transform.position.z - 10.0f))
-                Destroy(enemy);
+            if(_player)
+            {
+                if (enemy.transform.position.z < (_player.transform.position.z - 10.0f))
+                    Destroy(enemy);
+            }
         }
     }
 }

@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class ScoreText : MonoBehaviour
 {
-    public GameObject Player;
-    public GameObject HPText;
+    public GameObject player;
+    public GameObject hpText;
 
 	void Start ()
     {
@@ -15,9 +15,15 @@ public class ScoreText : MonoBehaviour
 	void Update ()
     {
         var text = GetComponent<Text>();
-        text.text = "Score: " + Player.GetComponent<Player>().PlayerScore;
+        if(player)
+        {
+            text.text = "Score: " + player.GetComponent<Player>().PlayerScore;
+        }
 
-        var hpText = HPText.GetComponent<Text>();
-        hpText.text = "HP: " + Player.GetComponent<Player>().PlayerHP;
+        if (player)
+            hpText.GetComponent<Text>().text = "HP: " + player.GetComponent<Player>().PlayerHP;
+
+        else
+            hpText.GetComponent<Text>().text = "HP: 0";
     }
 }
