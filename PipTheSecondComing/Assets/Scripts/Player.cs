@@ -127,10 +127,20 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "EnemyBullet")
+        switch(other.tag)
         {
-            TakeDamage(other.GetComponent<Bullet>().DMG);
-            Destroy(other.gameObject);
+            case "EnemyBullet":
+                TakeDamage(other.GetComponent<Bullet>().DMG);
+                Destroy(other.gameObject);
+                break;
+            case "Enemy":
+                TakeDamage(30);
+                other.GetComponent<Enemy>().Die();
+                break;
+            case "Asteroid":
+                TakeDamage(other.GetComponent<Asteroid>().dmg);
+                other.GetComponent<Asteroid>().Die();
+                break;
         }
     }
 

@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour
         HP -= damage;
     }
 
-    void Die()
+    public void Die()
     {
         var player = GameObject.FindGameObjectWithTag("Player");
         player.GetComponent<Player>().UpdateScore(scoreValue);

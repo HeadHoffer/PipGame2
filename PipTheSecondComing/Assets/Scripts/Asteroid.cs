@@ -12,6 +12,8 @@ public class Asteroid : MonoBehaviour
         set { _hp = value; }
     }
 
+    public int dmg;
+
     public float speed;
     public float rotateSpeed;
     public int ScoreValue;
@@ -47,11 +49,9 @@ public class Asteroid : MonoBehaviour
     
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collision detected: " + other.name);
-
         if (other.tag == "Bullet")
         {
-            TakeDamage(30);
+            TakeDamage(other.GetComponent<Bullet>().DMG);
             Destroy(other.gameObject);
         }
     }
@@ -61,7 +61,7 @@ public class Asteroid : MonoBehaviour
         HP -= damage;
     }
 
-    void Die()
+    public void Die()
     {
         Debug.Log("u kyssed asteroid");
         var player = GameObject.FindGameObjectWithTag("Player");
